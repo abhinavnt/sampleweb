@@ -1,0 +1,14 @@
+const express=require("express")
+const router= express.Router()
+const userController= require('../controller/userController')
+const auth= require('../middlleware/auth')
+
+router.get("/login",auth.isLogin,userController.loadLogin)
+router.post('/login',userController.login)
+router.get("/register",auth.isLogin,userController.loadRegister)
+router.post("/register",userController.registeruser)
+router.get('/home',auth.checkSession,userController.loadHome)
+router.post('/logout',auth.checkSession,userController.logout)
+
+
+module.exports=router

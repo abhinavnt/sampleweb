@@ -1,0 +1,69 @@
+<%- include('partials/_header') %>
+<title>Login Page</title>
+<link rel="stylesheet" href="/userlogin.css">  
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="userlogin.css">
+<body>
+    <div class="container d-flex align-items-center justify-content-center min-vh-100">
+        <div class="card p-4 shadow-lg login-card">
+            <h2 class="text-center mb-4">Login</h2>
+            <span style="color: rgb(9, 9, 9);margin-left: 40px;"><%=message %></span>
+            <form onsubmit="return validateForm()" action="/user/login" method="post">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" class="form-control" name="username" id="username" placeholder="Enter your username">
+                    <span id="nameerror"></span>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" name="password" id="password" placeholder="Enter your password">
+                    <span id="passerror"></span>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Login</button>
+                <p class="text-center mt-3">Don't have an account? <a href="register">Sign Up</a></p>
+            </form>
+        </div>
+    </div>
+
+    <script>
+            const nameError=document.getElementById('nameerror')
+            const passError=document.getElementById('passerror')
+            const pass2Error=document.getElementById('passerror2')
+            
+            function validateName(){
+            const  username=document.getElementById('username').value.trim()
+            if(username.length===0){
+                nameError.innerHTML="name required"
+                return false
+            }else{
+                nameError.innerHTML="✅"
+                return true
+            }
+            }
+
+            function validatePassword(){   
+               const pass=document.getElementById('password').value.trim()
+               if(pass.length>=6){
+                 passError.innerHTML="✅"
+                return true
+               }else{
+                  passError.innerHTML="password need"
+                return false
+               }
+            }
+
+            function validateForm() {
+        const isNameValid = validateName();
+        const isPasswordValid = validatePassword();
+        return isNameValid && isPasswordValid ;
+    }
+    </script>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+

@@ -1,0 +1,92 @@
+<%- include('partials/_header') %>
+<title>Login Page</title>
+<link rel="stylesheet" href="/userlogin.css">  
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="userlogin.css">
+<body>
+    <div class="container d-flex align-items-center justify-content-center min-vh-100">
+        <div class="card p-4 shadow-lg login-card">
+            <h2 class="text-center mb-4">Login</h2>
+            <span style="color: red;margin-left: 40px;"><%=message %></span>
+            <form id="form"  onsubmit="return validateForm()" method="post" action="/user/register">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" class="form-control" name="username" onkeyup="validateName()" id="username" placeholder="Enter your username" >
+                    <span id="nameerror"></span>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" name="password" id="password" onkeyup="validatePassword()" placeholder="Enter your password">
+                    <span id="passerror"></span>
+                </div>
+                <div class="form-group">
+                    <label for="password">confirm Password</label>
+                    <input type="password" class="form-control" id="password2"  onkeyup="validatePassword2()" placeholder="confirm your password">
+                    <span id="passerror2"></span>
+                </div>
+                <button type="submit" onsubmit="valid()" class="btn btn-primary  btn-block">sign up</button>
+                <p class="text-center mt-3">Already have a account? <a href="login">log in</a></p>
+            </form>
+        </div>
+    </div>
+
+        <!-- validation -->
+         <script>
+            const nameError=document.getElementById('nameerror')
+            const passError=document.getElementById('passerror')
+            const pass2Error=document.getElementById('passerror2')
+            
+            function validateName(){
+            const  username=document.getElementById('username').value.trim()
+            if(username.length===0){
+                nameError.innerHTML="name required"
+                return false
+            }else{
+                nameError.innerHTML="✅"
+                return true
+            }
+            }
+
+            function validatePassword(){   
+               const pass=document.getElementById('password').value.trim()
+               if(pass.length>=6){
+                 passError.innerHTML="✅"
+                return true
+               }else{
+                  passError.innerHTML="need atleast 6 characters"
+                return false
+               }
+            }
+
+            function validatePassword2(){
+                const pass=document.getElementById('password').value.trim()
+                const pass2=document.getElementById('password2').value.trim()
+                if(pass2!=pass){
+                    pass2Error.innerHTML="password does not match"
+                    return false
+                }else{
+                    if(pass2.length!=0){
+                        pass2Error.innerHTML="✅"
+                        return true
+                    }else{
+                        pass2Error.innerHTML="required"
+                    }
+                   
+                }
+            }
+
+            function validateForm() {
+        const isNameValid = validateName();
+        const isPasswordValid = validatePassword();
+        const isPassword2Valid = validatePassword2();
+        return isNameValid && isPasswordValid && isPassword2Valid;
+    }
+         </script>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>

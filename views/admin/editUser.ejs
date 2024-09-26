@@ -1,0 +1,17 @@
+<%- include('partials/_header') %>
+<title>Edit User</title>
+<link rel="stylesheet" href="/dashBoard.css">
+
+<body>
+    <div class="container">
+        <h1>Edit User</h1>
+        <form action="/admin/update-user/<%= user.id %>" method="POST">
+            <div>
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" value="<%= user.username %>" required>
+            </div>
+            <button type="submit">Update User</button>
+        </form>
+        <a href="/admin/dashBoard">Back to Manage Users</a> 
+    </div>
+</body>
